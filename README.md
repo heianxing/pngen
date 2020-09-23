@@ -7,6 +7,7 @@
 在Java实体类上右键—>"Convert Java entity to create table sql"，就可以生成Mysql的SQL语句
 
 Java实体类：
+```
 @Getter
 @Setter
 @Entity(name = "shop")
@@ -46,9 +47,10 @@ public class shop  {
     @Column(name = "remark")
     private String remark;
 }
-
+```
 
 生成的SQL：
+```
 CREATE TABLE `shop` (
 `id` bigint(20) NOT NULL ,
 `username` VARCHAR(255) NOT NULL COMMENT '用户名',
@@ -58,4 +60,4 @@ CREATE TABLE `shop` (
 `remark` VARCHAR(255) NOT NULL COMMENT '备注',
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
+```
