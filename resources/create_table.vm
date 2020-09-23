@@ -1,0 +1,6 @@
+CREATE TABLE `${table.name}` (
+#foreach( $column in $table.columns )
+`${column.name}` ${column.type} NOT NULL #if($column.comment)COMMENT '$column.comment'#end,
+#end
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
