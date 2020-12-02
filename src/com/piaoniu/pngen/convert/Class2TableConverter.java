@@ -44,6 +44,21 @@ public class Class2TableConverter {
     public Table convert(PsiClass psiClass) {
         Table table = new Table();
         table.setName(prefix + psiClass.getName());
+
+        PsiAnnotation[] tableAnnotations = psiClass.getAnnotations();
+        for (PsiAnnotation psia : tableAnnotations) {
+            PsiJavaCodeReferenceElement referenceElement = psia.getNameReferenceElement();
+            if (null != referenceElement
+                    && "javax.persistence.Entity".equals(referenceElement.getQualifiedName())) {
+                PsiAnnotationMemberValue nameAnno = psia.findAttributeValue("name");
+                if (null != nameAnno) {
+                    table.setName(nameAnno.getText().replace("\"", ""));
+                    break;
+                }
+            }
+        }
+
+
         for (PsiField psiField : psiClass.getFields()) {
             PsiModifierList psiModifierList = psiField.getModifierList();
 
